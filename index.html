@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="./favicn.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>   .</title>
+</head>
+<body>
+    <div id="big-div">
+        <button id="1-1" onclick="clickbutton(1,1)" class="big-button"></button>
+        <button id="1-2" onclick="clickbutton(1,2)" class="big-button"></button>
+        <button id="1-3" onclick="clickbutton(1,3)" class="big-button"></button>
+        <button id="1-4" onclick="clickbutton(1,4)" class="big-button"></button>
+        <button id="1-5" onclick="clickbutton(1,5)" class="big-button"></button>
+        <button id="1-6" onclick="clickbutton(1,6)" class="big-button"></button>
+        <button id="2-1" onclick="clickbutton(2,1)" class="big-button"></button>
+        <button id="2-2" onclick="clickbutton(2,2)" class="big-button"></button>
+        <button id="2-3" onclick="clickbutton(2,3)" class="big-button"></button>
+        <button id="2-4" onclick="clickbutton(2,4)" class="big-button"></button>
+        <button id="2-5" onclick="clickbutton(2,5)" class="big-button"></button>
+        <button id="2-6" onclick="clickbutton(2,6)" class="big-button"></button>
+        <button id="3-1" onclick="clickbutton(3,1)" class="big-button"></button>
+        <button id="3-2" onclick="clickbutton(3,2)" class="big-button"></button>
+        <button id="3-3" onclick="clickbutton(3,3)" class="big-button"></button>
+        <button id="3-4" onclick="clickbutton(3,4)" class="big-button"></button>
+        <button id="3-5" onclick="clickbutton(3,5)" class="big-button"></button>
+        <button id="3-6" onclick="clickbutton(3,6)" class="big-button"></button>
+        <button id="4-1" onclick="clickbutton(4,1)" class="big-button"></button>
+        <button id="4-2" onclick="clickbutton(4,2)" class="big-button"></button>
+        <button id="4-3" onclick="clickbutton(4,3)" class="big-button"></button>
+        <button id="4-4" onclick="clickbutton(4,4)" class="big-button"></button>
+        <button id="4-5" onclick="clickbutton(4,5)" class="big-button"></button>
+        <button id="4-6" onclick="clickbutton(4,6)" class="big-button"></button>
+    </div>
+    <audio id="fail" src="./error-notification.mp3"></audio>
+    <audio id="win" src="./win.mp3"></audio>
+    <audio id="key" src="./key.mp3"></audio>
+
+</body>
+<style>
+    #big-div {
+        position: absolute;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        column-gap: 10px;
+        row-gap: 10px;
+        width: 50vw;
+        height: 90vh;
+        margin-left: 25%;
+        margin-top: 2.5vh;
+    }
+    .big-button {
+        font-size: 150px;
+        font-width: 0px;
+        margin: 0px;
+        padding: 0px;
+        width: 160px;
+        height: 200px;
+    }
+    body {
+        align-items: center;
+        padding: 0;
+    }
+</style>
+<script>
+    const clickSound = new Audio('key.mp3')
+    const symbols = ["▢", "△", "◇", "◯", ""]
+    var currentSymbol = 0
+    const correctSymbols = ["3-4", "1-3", "2-1", "3-6"]
+    var currentCorrectSymbols = 0
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    async function clickbutton(x,y) {
+        if (currentSymbol >= 3 && currentCorrectSymbols < 3) {
+            document.getElementById("big-div").style.pointerEvents = "none";
+            playKeySound()
+            document.getElementById(x + "-" + y).innerHTML = symbols[currentSymbol]
+            await sleep(1000); 
+            playFailSound()
+            resetGrid()
+            document.getElementById("big-div").style.pointerEvents = "auto";
+        } else {
+            document.getElementById(x + "-" + y).innerHTML = symbols[currentSymbol]
+            if (x + "-" + y == correctSymbols[currentSymbol]) {
+                currentCorrectSymbols++
+                if (currentCorrectSymbols >= 4) {
+                    document.getElementById("big-div").style.pointerEvents = "none";
+                    playKeySound()
+                    await sleep(1000)
+                    win()
+                } else {
+                    playKeySound()
+                }
+            } else {
+                playKeySound()
+                if (currentSymbol == 3) {
+                    document.getElementById("big-div").style.pointerEvents = "none";
+                    await sleep(1000); 
+                    resetGrid()
+                    playFailSound()
+                    document.getElementById("big-div").style.pointerEvents = "auto";
+                }
+            }
+            currentSymbol++
+        }
+    }
+    function resetGrid() {
+        let i = 1
+        let j = 1
+        while (j <= 4 && i <= 6) {
+            document.getElementById(j + "-" + i).innerHTML = ""
+            if (i < 6) {
+                i++
+            } else {
+                i = 1
+                j++
+            }
+        }
+        currentSymbol = 0
+        currentCorrectSymbols = 0
+    }
+    function playFailSound() {
+        console.log("you failed")
+        document.getElementById("fail").play()
+    }
+    async function win() {
+        document.getElementById("win").play()
+        await sleep(1500)
+        window.location.href = "./wikipedia-page.html"
+    }
+    function playKeySound() {
+        // Cloner le nœud audio permet de superposer les sons si les clics sont ultra-rapides
+        const soundClone = clickSound.cloneNode();
+        soundClone.volume = 1; // Optionnel : ajuster le volume (0.0 à 1.0)
+        soundClone.play();
+        
+        // Optionnel : Nettoyer la mémoire une fois le son terminé
+        soundClone.onended = function() {
+            soundClone.remove();
+        };
+    }
+</script>
+</html>

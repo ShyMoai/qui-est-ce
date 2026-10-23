@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="700">
+<text text-anchor="middle" font-size="42" font-family="Bitstream Vera Sans" y="60" x="110">F<tspan x="290">I</tspan><tspan
+x="470">L</tspan><tspan x="650">N</tspan><tspan x="830">P</tspan><tspan x="1010">T</tspan><tspan y="432" x="110">U</tspan><tspan
+x="290">V</tspan><tspan x="470">W</tspan><tspan x="650">X</tspan><tspan x="830">Y</tspan><tspan x="1010">Z</tspan></text>
+<path stroke="#000" stroke-width="52" stroke-dasharray="52,4" d="
+M110,84v164M140,110h52M28,166h52M290,84v276M442,84v220M472,278h52M622,140v164M678,84v108M802,140v108M858,84v164M1010,140v108M928,110h164
+M28,482h52m60,0h52m0,56H28M234,456v164M208,594h164M414,456v108M470,512v108M526
+568v52M650,456v164M568,538h164M776,538h52M858,456v220M1010,456v164M928,482h52M1040,594h52"/>
+<g stroke-width="48" stroke-dasharray="48,8">
+<path stroke="#DF0" d="m110,86v160M142,110h48M30,166h48"/>
+<path stroke="#22D" d="m290,86v272"/>
+<path stroke="#F5B" d="m442,86v216M474,278h48"/>
+<path stroke="#00F" d="m622,142v160M678,86v104"/>
+<path stroke="#0F0" d="m802,142v104M858,86v160"/>
+<path stroke="#0FE" d="m1010,142v104M930,110h160"/>
+<path stroke="#F0C" d="m30,482h48m64,0h48m0,56H30"/>
+<path stroke="#0BA" d="m234,458v160M210,594h160"/>
+<path stroke="#8E8" d="m414,458v104M470,514v104M526,570v48"/>
+<path stroke="#F00" d="m650,458v160M570,538h160"/>
+<path stroke="#30B" d="m778,538h48M858,458v216"/>
+<path stroke="#BB0" d="m1010,458v160M930,482h48M1042,594h48"/>
+</g></svg>
